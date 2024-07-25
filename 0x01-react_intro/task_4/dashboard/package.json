@@ -2,6 +2,7 @@
   "name": "dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://lolade-olatunji.github.io/https://@github.com/lolade-olatunji/alx-react.git",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
