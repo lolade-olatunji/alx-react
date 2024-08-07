@@ -1,6 +1,5 @@
-import React from 'react';
-import './CourseList.css';
-import CourseListRow from './CourseListRow';
+import React from "react";
+import PropTypes from "prop-types";
 
 const rowStyle = {
   backgroundColor: "#f5f5f5ab",
@@ -9,38 +8,40 @@ const rowStyle = {
 const headerStyle = {
   backgroundColor: "#deb5b545",
 };
- 
-const CourseList = () => {
-  return (
-    <table style={rowStyle} className='course-list'>
-      <thead style={headerStyle}>
-        <CourseListRow  textFirstCell='Available courses' isHeader={true} />
-        <CourseListRow
 
-          textFirstCell='Course name'
-          textSecondCell='Credit'
-          isHeader={true}
-        />
-      </thead>
-      <tbody>
-        <CourseListRow
-          textFirstCell='ES6'
-          textSecondCell='60'
-          isHeader={false}
-        />
-        <CourseListRow
-          textFirstCell='Webpack'
-          textSecondCell='20'
-          isHeader={false}
-        />
-        <CourseListRow
-          textFirstCell='React'
-          textSecondCell='40'
-          isHeader={false}
-        />
-      </tbody>
-    </table>
+function CourseListRow({ isHeader, textFirstCell, textSecondCell }) {
+  return (
+    <tr style={rowStyle}>
+      {isHeader ? (
+        textSecondCell === null ? (
+          <th style={headerStyle} colSpan={2}>
+            {textFirstCell}
+          </th>
+        ) : (
+          <>
+            <th style={headerStyle}>{textFirstCell}</th>
+            <th style={headerStyle}>{textSecondCell}</th>
+          </>
+        )
+      ) : (
+        <>
+          <td>{textFirstCell}</td>
+          <td>{textSecondCell}</td>
+        </>
+      )}
+    </tr>
   );
+}
+
+CourseListRow.propTypes = {
+  isHeader: PropTypes.bool,
+  textFirstCell: PropTypes.string.isRequired,
+  textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-export default CourseList;
+CourseListRow.defaultProps = {
+  isHeader: false,
+  textSecondCell: null,
+};
+
+export default CourseListRow;
